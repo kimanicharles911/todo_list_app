@@ -33,6 +33,17 @@ listsContainer.addEventListener("click", e => {
   }
 })
 
+tasksContainer.addEventListener("click", e =>{
+  if(e.target.tagName.toLowerCase() === "input"){
+    const selectedList = lists.find(list => list.id === selectedListId);
+    const selectedTask = selectedList.tasks.find(task => task.id === e.target.id);
+    selectedTask.complete = e.target.checked;
+    save();
+    renderTaskCount(selectedList);
+  }
+})
+
+
 /* delete button event listener */
 deleteListButton.addEventListener("click", e => {
   lists = lists.filter(list => list.id !== selectedListId);
@@ -77,7 +88,6 @@ function saveAndRender(){
   save();
   render();
 }
-
 
 /* function to save the list in the line with let lists = JSON.parse... */
 function save(){
