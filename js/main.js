@@ -4,6 +4,8 @@ const listsContainer = document.querySelector("[data-lists]");
 /* fetching the form */
 const newListForm = document.querySelector("[data-new-list-form]");
 const newListInput = document.querySelector("[data-new-list-input]");
+/* fetching the delete button */
+const deleteListButton = document.querySelector("[data-delete-list-button]")
  
 /* Saving user input */
 const LOCAL_STORAGE_LIST_KEY = "task.lists";
@@ -15,6 +17,22 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [] ;
 
 /* to select a list on left form: first make a variable for the selected list */
 let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
+
+/* adding an event listener to the HTML container */
+listsContainer.addEventListener("click", e => {
+  e.preventDefault()
+  if(e.target.tagName.toLowerCase() === "li"){
+    selectedListId = e.target.dataset.listId;
+    saveAndRender();  
+  }
+})
+
+/* delete button event listener */
+deleteListButton.addEventListener("click", e => {
+  lists = lists.filter(list => list.id !== selectedListId);
+  selectedListId = null;
+  saveAndRender();
+})
 
 /* from event listener */
 newListForm.addEventListener("submit", e => {
@@ -42,6 +60,7 @@ function saveAndRender(){
 function save(){
   /* localStorage.setItem(THE_KEY, THE_VALUE_OF_THAT_KEY); */
   localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
+  localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId)
 }
 
 /* render function that renders the list */
