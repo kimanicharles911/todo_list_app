@@ -7,9 +7,14 @@ const newListInput = document.querySelector("[data-new-list-input]");
  
 /* Saving user input */
 const LOCAL_STORAGE_LIST_KEY = "task.lists";
+        /* key for variable that stores the selected list */
+const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = "task.selectedListId"
 
 /* variable that holds all our lists */
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [] ;
+
+/* to select a list on left form: first make a variable for the selected list */
+let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
 /* from event listener */
 newListForm.addEventListener("submit", e => {
@@ -47,6 +52,9 @@ function render(){
     listElement.dataset.listId = list.id;
     listElement.classList.add("list-name");
     listElement.innerText = list.name;
+    if(list.id === selectedListId) {
+      listElement.classList.add("active-list")
+    }
     listsContainer.appendChild(listElement)
   })
 }
