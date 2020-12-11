@@ -69,6 +69,17 @@ function save(){
 /* render function that renders the list */
 function render(){
   clearElement(listsContainer);
+  renderLists();
+  const selectedList = lists.find(list => list.id === selectedListId);/* finding the list that has the ID of the selectedList */
+  if(selectedListId == null){
+    listDisplayContainer.style.display = "none";    
+  }else{
+    listDisplayContainer.style.display = "";
+    listTitleElement.innerText = selectedList.name;
+  }
+}
+
+function renderLists(){
   lists.forEach(list => {
     const listElement = document.createElement("li");
     listElement.dataset.listId = list.id;
