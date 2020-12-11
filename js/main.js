@@ -4,9 +4,12 @@ const listsContainer = document.querySelector("[data-lists]");
 /* fetching the form */
 const newListForm = document.querySelector("[data-new-list-form]");
 const newListInput = document.querySelector("[data-new-list-input]");
-/* fetching the delete button */
-const deleteListButton = document.querySelector("[data-delete-list-button]")
- 
+const deleteListButton = document.querySelector("[data-delete-list-button]");/* fetching the delete button */
+const listDisplayContainer = document.querySelector("[data-list-display-container]");/* fetching the to-do list container */
+const listTitleElement = document.querySelector("[data-list-title]");/* fetching the to-do list title */
+const listCountElement = document.querySelector("[data-list-count]");/* fetching the to-do list count */
+const tasksContainer = document.querySelector("[data-tasks]");/* fetching the tasks container that has the to-dos */
+
 /* Saving user input */
 const LOCAL_STORAGE_LIST_KEY = "task.lists";
         /* key for variable that stores the selected list */
